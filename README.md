@@ -132,9 +132,6 @@ stop.bat
 ### 1.3. 手动启动（可选）
 
 ```bash
-# 仅启动后端（项目根目录）
-./start_backend.sh
-
 # 启动前端本地服务
 cd frontend && python -m http.server 8080
 ```

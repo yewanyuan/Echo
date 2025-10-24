@@ -132,9 +132,6 @@ stop.bat
 ### 1.3. Manual Startup (Optional)
 
 ```bash
-# Start backend only (from project root)
-./start_backend.sh
-
 # Serve the frontend
 cd frontend && python -m http.server 8080
 ```
