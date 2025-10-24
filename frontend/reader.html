@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="Echo Reader - Immerse in Reading" data-zh="Echo 阅读器 - 沉浸式阅读">Echo Reader - Immerse in Reading</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&family=Noto+Serif:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="reader-style.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <div class="brand-icon-small">
+                    <i class="bi bi-soundwave"></i>
+                </div>
+                <span class="brand-text-small">Echo</span>
+            </a>
+
+            <div class="d-flex align-items-center gap-3">
+                <!-- Language Toggle -->
+                <button class="btn language-toggle-small" id="languageToggle" onclick="toggleLanguage()">
+                    <i class="bi bi-translate"></i>
+                    <span id="currentLang">EN</span>
+                </button>
+
+                <!-- Settings Button -->
+                <button class="btn btn-icon" data-bs-toggle="offcanvas" data-bs-target="#settingsPanel" title="Settings">
+                    <i class="bi bi-gear-fill"></i>
+                </button>
+
+                <!-- Home Button -->
+                <a href="index.html" class="btn btn-icon" title="Home">
+                    <i class="bi bi-house-fill"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <!-- Sidebar - Library & TOC -->
+            <div class="col-lg-2 col-md-3 sidebar border-end" id="sidebar">
+                <div class="sidebar-content">
+                    <!-- Tabs for Library and TOC -->
+                    <ul class="nav nav-tabs" id="sidebarTabs" role="tablist">
+                        <li class="nav-item flex-fill" role="presentation">
+                            <button class="nav-link active w-100" id="library-tab" data-bs-toggle="tab" data-bs-target="#library-panel" type="button">
+                                <i class="bi bi-collection me-2"></i>
+                                <span data-en="Library" data-zh="书库">Library</span>
+                            </button>
+                        </li>
+                        <li class="nav-item flex-fill" role="presentation">
+                            <button class="nav-link w-100" id="toc-tab" data-bs-toggle="tab" data-bs-target="#toc-panel" type="button">
+                                <i class="bi bi-list-ul me-2"></i>
+                                <span data-en="Contents" data-zh="目录">Contents</span>
+                            </button>
+                        </li>
+                        <li class="nav-item flex-fill" role="presentation">
+                            <button class="nav-link w-100" id="ai-tab" data-bs-toggle="tab" data-bs-target="#ai-panel" type="button">
+                                <i class="bi bi-stars me-2"></i>
+                                <span data-en="AI" data-zh="AI">AI</span>
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="sidebarTabContent">
+                        <!-- Library Panel -->
+                        <div class="tab-pane fade show active" id="library-panel">
+                            <div class="p-3">
+                                <!-- Upload Section -->
+                                <div class="upload-section mb-4">
+                                    <label for="fileUpload" class="upload-box">
+                                        <i class="bi bi-cloud-upload-fill mb-2"></i>
+                                        <p class="mb-1" data-en="Upload E-Book" data-zh="上传电子书">Upload E-Book</p>
+                                        <small class="text-muted" data-en="EPUB, PDF, TXT, HTML" data-zh="支持 EPUB、PDF、TXT、HTML">EPUB, PDF, TXT, HTML</small>
+                                    </label>
+                                    <input type="file" id="fileUpload" class="d-none" accept=".epub,.pdf,.txt,.html,.htm,.mobi,.azw3,.fb2,.djvu,.doc,.docx" multiple>
+                                </div>
+
+                                <!-- Search Box -->
+                                <div class="search-box mb-3">
+                                    <i class="bi bi-search"></i>
+                                    <input type="text" class="form-control" id="librarySearch" data-en="Search library..." data-zh="搜索书库..." placeholder="Search library...">
+                                </div>
+
+                                <!-- Book List -->
+                                <div class="book-list" id="bookList">
+                                    <!-- Sample books will be added here -->
+                                    <div class="book-item" onclick="loadSampleBook('sample1')">
+                                        <div class="book-cover">
+                                            <i class="bi bi-book-fill"></i>
+                                        </div>
+                                        <div class="book-info">
+                                            <h6 data-en="The Art of Reading" data-zh="阅读的艺术">The Art of Reading</h6>
+                                            <small class="text-muted">John Doe</small>
+                                        </div>
+                                    </div>
+                                    <div class="book-item" onclick="loadSampleBook('sample2')">
+                                        <div class="book-cover">
+                                            <i class="bi bi-book-fill"></i>
+                                        </div>
+                                        <div class="book-info">
+                                            <h6 data-en="Digital Literature" data-zh="数字文学">Digital Literature</h6>
+                                            <small class="text-muted">Jane Smith</small>
+                                        </div>
+                                    </div>
+                                    <div class="book-item" onclick="loadSampleBook('sample3')">
+                                        <div class="book-cover">
+                                            <i class="bi bi-book-fill"></i>
+                                        </div>
+                                        <div class="book-info">
+                                            <h6 data-en="Modern Fiction" data-zh="现代小说">Modern Fiction</h6>
+                                            <small class="text-muted">Alex Johnson</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Table of Contents Panel -->
+                        <div class="tab-pane fade" id="toc-panel">
+                            <div class="p-3">
+                                <div class="toc-list" id="tocList">
+                                    <p class="text-muted text-center py-4" data-en="No book loaded" data-zh="未加载书籍">No book loaded</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Assistant Panel -->
+                        <div class="tab-pane fade" id="ai-panel">
+                            <div class="p-3">
+                                <!-- AI Feature Selection -->
+                                <div id="aiFeatureSelection">
+                                    <h6 class="mb-3" data-en="AI Assistant" data-zh="AI 助手">AI Assistant</h6>
+
+                                    <div class="ai-feature-card" onclick="selectAIFeature('book-summary')">
+                                        <div class="d-flex align-items-center">
+                                            <div class="ai-feature-icon gradient-blue-pink">
+                                                <i class="bi bi-file-text"></i>
+                                            </div>
+                                            <div>
+                                                <div class="ai-feature-title" data-en="Full Book Summary" data-zh="全书总结">Full Book Summary</div>
+                                                <p class="ai-feature-desc" data-en="Get a comprehensive overview" data-zh="获取全面概述">Get a comprehensive overview</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="ai-feature-card" onclick="selectAIFeature('chapter-summary')">
+                                        <div class="d-flex align-items-center">
+                                            <div class="ai-feature-icon gradient-purple-orange">
+                                                <i class="bi bi-list-columns"></i>
+                                            </div>
+                                            <div>
+                                                <div class="ai-feature-title" data-en="Chapter Summaries" data-zh="章节总结">Chapter Summaries</div>
+                                                <p class="ai-feature-desc" data-en="Summary for each chapter" data-zh="各章节的总结">Summary for each chapter</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="ai-feature-card" onclick="selectAIFeature('content-analysis')">
+                                        <div class="d-flex align-items-center">
+                                            <div class="ai-feature-icon gradient-green-teal">
+                                                <i class="bi bi-graph-up"></i>
+                                            </div>
+                                            <div>
+                                                <div class="ai-feature-title" data-en="Content Analysis" data-zh="内容分析">Content Analysis</div>
+                                                <p class="ai-feature-desc" data-en="Themes, characters, and more" data-zh="主题、角色等">Themes, characters, and more</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="ai-feature-card" onclick="selectAIFeature('chat')">
+                                        <div class="d-flex align-items-center">
+                                            <div class="ai-feature-icon gradient-yellow-red">
+                                                <i class="bi bi-chat-dots"></i>
+                                            </div>
+                                            <div>
+                                                <div class="ai-feature-title" data-en="Reading Assistant" data-zh="阅读助手">Reading Assistant</div>
+                                                <p class="ai-feature-desc" data-en="Chat about this book" data-zh="讨论这本书">Chat about this book</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Decorative Image -->
+                                    <div class="ai-decoration-container mt-4">
+                                        <img src="../pictures/5.jpg" alt="Decorative" class="ai-decoration-image">
+                                    </div>
+
+                                    <!-- No Book Loaded State -->
+                                    <div class="ai-empty-state mt-4 d-none" id="aiNoBookState">
+                                        <i class="bi bi-book"></i>
+                                        <p data-en="Please load a book to use AI features" data-zh="请加载一本书以使用 AI 功能">Please load a book to use AI features</p>
+                                    </div>
+                                </div>
+
+                                <!-- Book Summary Full Page -->
+                                <div id="aiBookSummaryPage" class="d-none">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <button class="btn btn-sm btn-outline-secondary" onclick="backToAISelection()">
+                                            <i class="bi bi-arrow-left me-1"></i>
+                                            <span data-en="Back" data-zh="返回">Back</span>
+                                        </button>
+                                        <h6 class="mb-0" data-en="Full Book Summary" data-zh="全书总结">Full Book Summary</h6>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="refreshAIContent()">
+                                            <i class="bi bi-arrow-clockwise"></i>
+                                        </button>
+                                    </div>
+                                    <div class="ai-split-layout">
+                                        <div class="ai-split-content">
+                                            <div class="ai-page-content-full" id="aiBookSummaryContent">
+                                                <!-- Book summary content will be loaded here -->
+                                            </div>
+                                        </div>
+                                        <div class="ai-split-divider ai-divider-style-1"></div>
+                                        <div class="ai-split-placeholder">
+                                            <i class="bi bi-book opacity-25" style="font-size: 4rem;"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Chapter Summary Full Page -->
+                                <div id="aiChapterSummaryPage" class="d-none">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <button class="btn btn-sm btn-outline-secondary" onclick="backToAISelection()">
+                                            <i class="bi bi-arrow-left me-1"></i>
+                                            <span data-en="Back" data-zh="返回">Back</span>
+                                        </button>
+                                        <h6 class="mb-0" data-en="Chapter Summaries" data-zh="章节总结">Chapter Summaries</h6>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="refreshAIContent()">
+                                            <i class="bi bi-arrow-clockwise"></i>
+                                        </button>
+                                    </div>
+                                    <div class="ai-split-layout">
+                                        <div class="ai-split-content">
+                                            <div class="ai-page-content-full" id="aiChapterSummaryContent">
+                                                <!-- Chapter summaries content will be loaded here -->
+                                            </div>
+                                        </div>
+                                        <div class="ai-split-divider ai-divider-style-3"></div>
+                                        <div class="ai-split-placeholder">
+                                            <i class="bi bi-list-columns-reverse opacity-25" style="font-size: 4rem;"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Content Analysis Full Page -->
+                                <div id="aiContentAnalysisPage" class="d-none">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <button class="btn btn-sm btn-outline-secondary" onclick="backToAISelection()">
+                                            <i class="bi bi-arrow-left me-1"></i>
+                                            <span data-en="Back" data-zh="返回">Back</span>
+                                        </button>
+                                        <h6 class="mb-0" data-en="Content Analysis" data-zh="内容分析">Content Analysis</h6>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="refreshAIContent()">
+                                            <i class="bi bi-arrow-clockwise"></i>
+                                        </button>
+                                    </div>
+                                    <div class="ai-split-layout">
+                                        <div class="ai-split-content">
+                                            <div class="ai-page-content-full" id="aiContentAnalysisContent">
+                                                <!-- Content analysis will be loaded here -->
+                                            </div>
+                                        </div>
+                                        <div class="ai-split-divider ai-divider-style-2"></div>
+                                        <div class="ai-split-placeholder">
+                                            <i class="bi bi-graph-up-arrow opacity-25" style="font-size: 4rem;"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Reading Assistant (Chat) Full Page -->
+                                <div id="aiFullscreenChat" class="d-none">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <button class="btn btn-sm btn-outline-secondary" onclick="exitFullscreenChat()">
+                                            <i class="bi bi-arrow-left me-1"></i>
+                                            <span data-en="Back" data-zh="返回">Back</span>
+                                        </button>
+                                        <h6 class="mb-0" data-en="Reading Assistant" data-zh="阅读助手">Reading Assistant</h6>
+                                        <button class="btn btn-sm btn-outline-danger" onclick="clearChatHistory()">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- Chat content will be dynamically loaded here -->
+                                    <div id="aiChatContent">
+                                        <!-- Chat interface -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Reading Area -->
+            <div class="col-lg-10 col-md-9 reading-area">
+                <!-- Welcome Screen / Empty State -->
+                <div class="welcome-screen" id="welcomeScreen">
+                    <div class="text-center">
+                        <div class="welcome-icon mb-4">
+                            <i class="bi bi-book-half"></i>
+                        </div>
+                        <h2 class="mb-3" data-en="Welcome to Echo Reader" data-zh="欢迎使用 Echo 阅读器">Welcome to Echo Reader</h2>
+                        <p class="text-muted mb-4" data-en="Upload your e-books or select from the library to start reading" data-zh="上传您的电子书或从书库中选择以开始阅读">
+                            Upload your e-books or select from the library to start reading
+                        </p>
+                        <button class="btn btn-primary btn-lg" onclick="document.getElementById('fileUpload').click()">
+                            <i class="bi bi-upload me-2"></i>
+                            <span data-en="Upload Book" data-zh="上传书籍">Upload Book</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Reading Content -->
+                <div class="reading-content d-none" id="readingContent">
+                    <!-- Book Header -->
+                    <div class="book-header">
+                        <div class="container-reader">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h4 class="book-title mb-1" id="bookTitle">Book Title</h4>
+                                    <small class="text-muted" id="bookAuthor">Author Name</small>
+                                </div>
+                                <div class="reading-progress-badge">
+                                    <span id="readingProgress">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Book Content Display -->
+                    <div class="book-content-wrapper">
+                        <div class="opacity-overlay"></div>
+                        <div class="container-reader">
+                            <div class="book-content" id="bookContent">
+                                <!-- Book content will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reading Controls -->
+                    <div class="reading-controls">
+                        <div class="container-reader">
+                            <div class="controls-wrapper">
+                                <!-- Progress Bar -->
+                                <div class="progress-section mb-3">
+                                    <input type="range" class="form-range progress-slider" id="progressSlider" min="0" max="100" value="0">
+                                    <div class="d-flex justify-content-between">
+                                        <small class="text-muted" id="currentPage">Page 1</small>
+                                        <small class="text-muted" id="totalPages">of 100</small>
+                                    </div>
+                                </div>
+
+                                <!-- Navigation Buttons -->
+                                <div class="d-flex justify-content-center gap-3">
+                                    <button class="btn btn-control" id="prevBtn" onclick="previousPage()">
+                                        <i class="bi bi-chevron-left"></i>
+                                        <span data-en="Previous" data-zh="上一页">Previous</span>
+                                    </button>
+                                    <button class="btn btn-control" id="nextBtn" onclick="nextPage()">
+                                        <span data-en="Next" data-zh="下一页">Next</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Offcanvas -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="settingsPanel">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title" data-en="Reading Settings" data-zh="阅读设置">Reading Settings</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Font Family -->
+            <div class="setting-group mb-4">
+                <label class="setting-label mb-2" data-en="Font Family" data-zh="字体系列">Font Family</label>
+                <select class="form-select" id="fontFamily" onchange="changeFontFamily()">
+                    <option value="serif" data-en="Serif" data-zh="衬线体">Serif</option>
+                    <option value="sans-serif" selected data-en="Sans Serif" data-zh="无衬线体">Sans Serif</option>
+                    <option value="monospace" data-en="Monospace" data-zh="等宽字体">Monospace</option>
+                </select>
+            </div>
+
+            <!-- Font Size -->
+            <div class="setting-group mb-4">
+                <label class="setting-label mb-2" data-en="Font Size" data-zh="字体大小">Font Size</label>
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn btn-sm btn-outline-secondary" onclick="changeFontSize(-1)">
+                        <i class="bi bi-dash-lg"></i>
+                    </button>
+                    <span id="fontSizeDisplay">18px</span>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="changeFontSize(1)">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Line Height -->
+            <div class="setting-group mb-4">
+                <label class="setting-label mb-2" data-en="Line Height" data-zh="行高">Line Height</label>
+                <input type="range" class="form-range" id="lineHeight" min="1.2" max="2.5" step="0.1" value="1.8" onchange="changeLineHeight()">
+                <div class="text-center">
+                    <small id="lineHeightDisplay">1.8</small>
+                </div>
+            </div>
+
+            <!-- Reading Width -->
+            <div class="setting-group mb-4">
+                <label class="setting-label mb-2" data-en="Reading Width" data-zh="阅读宽度">Reading Width</label>
+                <select class="form-select" id="readingWidth" onchange="changeReadingWidth()">
+                    <option value="narrow" data-en="Narrow (600px)" data-zh="窄 (600px)">Narrow (600px)</option>
+                    <option value="medium" selected data-en="Medium (800px)" data-zh="中等 (800px)">Medium (800px)</option>
+                    <option value="wide" data-en="Wide (1000px)" data-zh="宽 (1000px)">Wide (1000px)</option>
+                    <option value="extra-wide" data-en="Extra Wide (1200px)" data-zh="超宽 (1200px)">Extra Wide (1200px)</option>
+                    <option value="ultra-wide" data-en="Ultra Wide (1400px)" data-zh="极宽 (1400px)">Ultra Wide (1400px)</option>
+                    <option value="super-wide" data-en="Super Wide (1600px)" data-zh="特宽 (1600px)">Super Wide (1600px)</option>
+                    <option value="full" data-en="Full Width" data-zh="全宽">Full Width</option>
+                </select>
+            </div>
+
+            <!-- Decorative Borders -->
+            <div class="setting-group mb-4">
+                <label class="setting-label mb-2" data-en="Decorative Borders" data-zh="装饰边框">Decorative Borders</label>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" id="decorativeBorders" onchange="toggleDecorativeBorders()">
+                    <label class="form-check-label" for="decorativeBorders">
+                        <span data-en="Show decorative borders" data-zh="显示装饰边框">Show decorative borders</span>
+                    </label>
+                </div>
+                <label class="form-label small text-muted" data-en="Border Style" data-zh="边框样式">Border Style</label>
+                <select class="form-select form-select-sm" id="borderStyle" onchange="changeBorderStyle()">
+                    <option value="style1" data-en="Dashed Lines" data-zh="虚线">Dashed Lines</option>
+                    <option value="style2" data-en="Vertical Dots" data-zh="竖点">Vertical Dots</option>
+                    <option value="style3" data-en="Gradient Flow" data-zh="渐变流动">Gradient Flow</option>
+                    <option value="style4" data-en="Elegant Waves" data-zh="优雅波浪">Elegant Waves</option>
+                    <option value="style5" data-en="Book Spine" data-zh="书脊">Book Spine</option>
+                    <option value="style6" data-en="Minimalist" data-zh="极简">Minimalist</option>
+                </select>
+            </div>
+
+            <!-- Theme -->
+            <div class="setting-group mb-4">
+                <label class="setting-label mb-2" data-en="Reading Theme" data-zh="阅读主题">Reading Theme</label>
+                <div class="theme-options">
+                    <button class="theme-btn active" data-theme="light" onclick="changeTheme('light')">
+                        <div class="theme-preview light"></div>
+                        <span data-en="Light" data-zh="浅色">Light</span>
+                    </button>
+                    <button class="theme-btn" data-theme="sepia" onclick="changeTheme('sepia')">
+                        <div class="theme-preview sepia"></div>
+                        <span data-en="Sepia" data-zh="棕褐">Sepia</span>
+                    </button>
+                    <button class="theme-btn" data-theme="green" onclick="changeTheme('green')">
+                        <div class="theme-preview green"></div>
+                        <span data-en="Green" data-zh="淡绿">Green</span>
+                    </button>
+                    <button class="theme-btn" data-theme="pink" onclick="changeTheme('pink')">
+                        <div class="theme-preview pink"></div>
+                        <span data-en="Pink" data-zh="淡粉">Pink</span>
+                    </button>
+                    <button class="theme-btn" data-theme="lavender" onclick="changeTheme('lavender')">
+                        <div class="theme-preview lavender"></div>
+                        <span data-en="Lavender" data-zh="薰衣草">Lavender</span>
+                    </button>
+                    <button class="theme-btn" data-theme="cream" onclick="changeTheme('cream')">
+                        <div class="theme-preview cream"></div>
+                        <span data-en="Cream" data-zh="奶油">Cream</span>
+                    </button>
+                    <button class="theme-btn" data-theme="dark" onclick="changeTheme('dark')">
+                        <div class="theme-preview dark"></div>
+                        <span data-en="Dark" data-zh="深色">Dark</span>
+                    </button>
+                    <button class="theme-btn" data-theme="night" onclick="changeTheme('night')">
+                        <div class="theme-preview night"></div>
+                        <span data-en="Night" data-zh="夜间">Night</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Custom Background -->
+            <div class="setting-group mb-4">
+                <label class="setting-label mb-2" data-en="Custom Background" data-zh="自定义背景">Custom Background</label>
+
+                <!-- Upload Background Image -->
+                <div class="mb-3">
+                    <label for="backgroundUpload" class="btn btn-outline-primary w-100">
+                        <i class="bi bi-image me-2"></i>
+                        <span data-en="Upload Background Image" data-zh="上传背景图片">Upload Background Image</span>
+                    </label>
+                    <input type="file" id="backgroundUpload" class="d-none" accept="image/*" onchange="uploadBackgroundImage()">
+                </div>
+
+                <!-- Current Background Preview -->
+                <div id="backgroundPreview" class="mb-3 d-none">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <small class="text-muted" data-en="Current Background" data-zh="当前背景">Current Background</small>
+                        <button class="btn btn-sm btn-outline-danger" onclick="removeBackgroundImage()">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                    <div id="backgroundPreviewImage" style="height: 80px; background-size: cover; background-position: center; border-radius: 8px; border: 1px solid #E8E8E8;"></div>
+                </div>
+
+                <!-- Background Opacity -->
+                <div class="mb-3">
+                    <label class="form-label small" data-en="Background Opacity" data-zh="背景不透明度">Background Opacity</label>
+                    <input type="range" class="form-range" id="backgroundOpacity" min="0" max="100" value="100" onchange="changeBackgroundOpacity()">
+                    <div class="text-center">
+                        <small id="backgroundOpacityDisplay">100%</small>
+                    </div>
+                </div>
+
+                <!-- Frosted Glass Effect -->
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" id="frostedGlass" onchange="toggleFrostedGlass()">
+                    <label class="form-check-label" for="frostedGlass">
+                        <span data-en="Frosted Glass Effect" data-zh="毛玻璃效果">Frosted Glass Effect</span>
+                    </label>
+                </div>
+
+                <!-- Frosted Glass Intensity -->
+                <div id="frostedGlassIntensityControl" class="d-none">
+                    <label class="form-label small" data-en="Blur Intensity" data-zh="模糊强度">Blur Intensity</label>
+                    <input type="range" class="form-range" id="frostedGlassIntensity" min="2" max="30" value="10" onchange="changeFrostedGlassIntensity()">
+                    <div class="text-center">
+                        <small id="frostedGlassIntensityDisplay">10px</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text Alignment -->
+            <div class="setting-group mb-4">
+                <label class="setting-label mb-2" data-en="Text Alignment" data-zh="文本对齐">Text Alignment</label>
+                <div class="btn-group w-100" role="group">
+                    <button type="button" class="btn btn-outline-secondary" onclick="changeAlignment('left')">
+                        <i class="bi bi-text-left"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary active" onclick="changeAlignment('justify')">
+                        <i class="bi bi-justify"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="changeAlignment('center')">
+                        <i class="bi bi-text-center"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Reset Settings -->
+            <div class="setting-group">
+                <button class="btn btn-outline-danger w-100" onclick="resetSettings()">
+                    <i class="bi bi-arrow-clockwise me-2"></i>
+                    <span data-en="Reset to Default" data-zh="恢复默认设置">Reset to Default</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- ePub.js Library for EPUB support -->
+    <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
+
+    <!-- PDF.js Library for PDF support -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <!-- AI Service Integration -->
+    <script src="ai-service.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="reader.js"></script>
+</body>
+</html>

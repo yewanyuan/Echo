@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="Echo - Your Digital Library" data-zh="Echo - 你的数字图书馆">Echo - Your Digital Library</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <div class="brand-icon">
+                    <i class="bi bi-soundwave"></i>
+                </div>
+                <span class="brand-text">Echo</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features" data-en="Features" data-zh="功能特点">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#library" data-en="Library" data-zh="书库">Library</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing" data-en="Pricing" data-zh="价格">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about" data-en="About" data-zh="关于">About</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <button class="btn language-toggle" id="languageToggle" onclick="toggleLanguage()">
+                            <i class="bi bi-translate"></i>
+                            <span id="currentLang">EN</span>
+                        </button>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-outline-primary px-4" href="#signin" data-en="Sign In" data-zh="登录">Sign In</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-primary px-4" href="reader.html" data-en="Get Started" data-zh="开始使用">Get Started</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center min-vh-100 py-5">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="badge-tag mb-4">
+                        <i class="bi bi-stars me-2"></i>
+                        <span data-en="AI-Powered Reading Experience" data-zh="AI 驱动的阅读体验">AI-Powered Reading Experience</span>
+                    </div>
+                    <h1 class="hero-title mb-4">
+                        <span data-en="Read Anything" data-zh="阅读一切">Read Anything</span><br>
+                        <span class="gradient-text" data-en="Instantly & Beautifully" data-zh="即刻而美好">Instantly & Beautifully</span>
+                    </h1>
+                    <p class="hero-description mb-4" data-en="Immerse yourself in a world of books with our advanced e-book reader. Smart features, beautiful design, and seamless reading across all your devices. Perfect for book lovers, students, and professionals." data-zh="通过我们先进的电子书阅读器，沉浸在书籍的世界中。智能功能、精美设计以及跨设备无缝阅读体验。非常适合书籍爱好者、学生和专业人士。">
+                        Immerse yourself in a world of books with our advanced e-book reader.
+                        Smart features, beautiful design, and seamless reading across all your devices.
+                        Perfect for book lovers, students, and professionals.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 mb-5">
+                        <a href="reader.html" class="btn btn-primary btn-lg px-4">
+                            <span data-en="Start Reading" data-zh="开始阅读">Start Reading</span>
+                            <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-secondary btn-lg px-4">
+                            <i class="bi bi-play-circle me-2"></i>
+                            <span data-en="Watch Demo" data-zh="观看演示">Watch Demo</span>
+                        </a>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <h3>10K+</h3>
+                            <p data-en="Books" data-zh="书籍">Books</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>99.9%</h3>
+                            <p data-en="User Satisfaction" data-zh="用户满意度">User Satisfaction</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>1M+</h3>
+                            <p data-en="Active Readers" data-zh="活跃读者">Active Readers</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image-container">
+                        <div class="floating-badge badge-1">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i>
+                            <span data-en="Reading Progress Saved" data-zh="阅读进度已保存">Reading Progress Saved</span>
+                        </div>
+                        <div class="floating-badge badge-2">
+                            <i class="bi bi-lightning-charge-fill text-warning me-2"></i>
+                            <span data-en="Fast & Smooth" data-zh="快速流畅">Fast & Smooth</span>
+                        </div>
+                        <div class="phone-mockup">
+                            <div class="phone-screen">
+                                <div class="book-reader-ui">
+                                    <div class="reader-header">
+                                        <i class="bi bi-arrow-left"></i>
+                                        <span data-en="Chapter 5" data-zh="第 5 章">Chapter 5</span>
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </div>
+                                    <div class="reader-content">
+                                        <h2 class="book-title" data-en="The Art of Reading" data-zh="阅读的艺术">The Art of Reading</h2>
+                                        <div class="reading-illustration">
+                                            <i class="bi bi-book-half text-primary" style="font-size: 80px;"></i>
+                                            <div class="reading-progress mt-3">
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-gradient" style="width: 65%"></div>
+                                                </div>
+                                                <small class="text-muted mt-2 d-block" data-en="65% Complete" data-zh="已完成 65%">65% Complete</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="floating-badge badge-3">
+                            <i class="bi bi-shield-check text-info me-2"></i>
+                            <span data-en="Secure & Private" data-zh="安全私密">Secure & Private</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="section-title mb-3" data-en="Why Choose Echo?" data-zh="为什么选择 Echo？">Why Choose Echo?</h2>
+                <p class="section-description" data-en="Powerful features designed to enhance your reading experience" data-zh="强大的功能，旨在提升您的阅读体验">
+                    Powerful features designed to enhance your reading experience
+                </p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon blue">
+                            <i class="bi bi-lightning-charge-fill"></i>
+                        </div>
+                        <h4 data-en="Lightning Fast" data-zh="闪电般快速">Lightning Fast</h4>
+                        <p data-en="Instant page loads and smooth transitions. Experience seamless reading without any lag or delay." data-zh="即时页面加载和流畅过渡。享受无延迟的无缝阅读体验。">Instant page loads and smooth transitions. Experience seamless reading without any lag or delay.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon pink">
+                            <i class="bi bi-palette-fill"></i>
+                        </div>
+                        <h4 data-en="Customizable Themes" data-zh="可自定义主题">Customizable Themes</h4>
+                        <p data-en="Choose from beautiful themes or create your own. Dark mode, sepia, and custom color schemes available." data-zh="从精美主题中选择或创建自己的主题。支持深色模式、棕褐色和自定义配色方案。">Choose from beautiful themes or create your own. Dark mode, sepia, and custom color schemes available.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon blue">
+                            <i class="bi bi-cloud-check-fill"></i>
+                        </div>
+                        <h4 data-en="Cloud Sync" data-zh="云端同步">Cloud Sync</h4>
+                        <p data-en="Your library and reading progress automatically sync across all your devices in real-time." data-zh="您的书库和阅读进度可在所有设备上实时自动同步。">Your library and reading progress automatically sync across all your devices in real-time.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon pink">
+                            <i class="bi bi-bookmark-star-fill"></i>
+                        </div>
+                        <h4 data-en="Smart Bookmarks" data-zh="智能书签">Smart Bookmarks</h4>
+                        <p data-en="AI-powered bookmarks and highlights. Never lose your place or important notes again." data-zh="AI 驱动的书签和高亮。再也不会丢失您的位置或重要笔记。">AI-powered bookmarks and highlights. Never lose your place or important notes again.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon blue">
+                            <i class="bi bi-phone-fill"></i>
+                        </div>
+                        <h4 data-en="Multi-Device Support" data-zh="多设备支持">Multi-Device Support</h4>
+                        <p data-en="Read on any device - phone, tablet, desktop, or e-reader. Perfectly optimized for all screens." data-zh="在任何设备上阅读 - 手机、平板、桌面或电子阅读器。完美适配所有屏幕。">Read on any device - phone, tablet, desktop, or e-reader. Perfectly optimized for all screens.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon pink">
+                            <i class="bi bi-eye-fill"></i>
+                        </div>
+                        <h4 data-en="Eye Comfort" data-zh="护眼舒适">Eye Comfort</h4>
+                        <p data-en="Adjustable brightness, font sizes, and spacing. Designed to reduce eye strain for long reading sessions." data-zh="可调节亮度、字体大小和间距。专为长时间阅读减少眼睛疲劳而设计。">Adjustable brightness, font sizes, and spacing. Designed to reduce eye strain for long reading sessions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-5">
+        <div class="container py-5">
+            <div class="cta-card">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 mb-4 mb-lg-0 text-center text-lg-start">
+                        <h2 class="cta-title mb-3" data-en="Start Your Reading Journey Today" data-zh="今天就开始您的阅读之旅">Start Your Reading Journey Today</h2>
+                        <p class="cta-description mb-0" data-en="Join over 1 million readers worldwide. Get instant access to thousands of books." data-zh="加入全球超过 100 万读者的行列。即刻访问数千本书籍。">
+                            Join over 1 million readers worldwide. Get instant access to thousands of books.
+                        </p>
+                    </div>
+                    <div class="col-lg-4 text-center text-lg-end">
+                        <a href="#" class="btn btn-light btn-lg px-5" data-en="Get Started Free" data-zh="免费开始">
+                            Get Started Free
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="section-title mb-3" data-en="Simple, Transparent Pricing" data-zh="简单透明的价格">Simple, Transparent Pricing</h2>
+                <p class="section-description" data-en="Choose the perfect plan for your reading needs" data-zh="选择最适合您阅读需求的套餐">
+                    Choose the perfect plan for your reading needs
+                </p>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h4 data-en="Free" data-zh="免费版">Free</h4>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">0</span>
+                                <span class="period" data-en="/month" data-zh="/月">/month</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> <span data-en="Access to 100+ free books" data-zh="访问 100+ 本免费书籍">Access to 100+ free books</span></li>
+                            <li><i class="bi bi-check-circle-fill"></i> <span data-en="Basic reading features" data-zh="基础阅读功能">Basic reading features</span></li>
+                            <li><i class="bi bi-check-circle-fill"></i> <span data-en="Single device" data-zh="单一设备">Single device</span></li>
+                            <li><i class="bi bi-x-circle text-muted"></i> <span data-en="Cloud sync" data-zh="云端同步">Cloud sync</span></li>
+                            <li><i class="bi bi-x-circle text-muted"></i> <span data-en="Advanced themes" data-zh="高级主题">Advanced themes</span></li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-primary w-100" data-en="Get Started" data-zh="开始使用">Get Started</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card featured">
+                        <div class="popular-badge" data-en="Most Popular" data-zh="最受欢迎">Most Popular</div>
+                        <div class="pricing-header">
+                            <h4 data-en="Premium" data-zh="高级版">Premium</h4>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">9.99</span>
+                                <span class="period" data-en="/month" data-zh="/月">/month</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> <span data-en="Access to 10K+ books" data-zh="访问 10K+ 本书籍">Access to 10K+ books</span></li>
+                            <li><i class="bi bi-check-circle-fill"></i> <span data-en="All reading features" data-zh="所有阅读功能">All reading features</span></li>
+                            <li><i class="bi bi-check-circle-fill"></i> <span data-en="Unlimited devices" data-zh="无限设备">Unlimited devices</span></li>
+                            <li><i class="bi bi-check-circle-fill"></i> <span data-en="Cloud sync" data-zh="云端同步">Cloud sync</span></li>
+                            <li><i class="bi bi-check-circle-fill"></i> <span data-en="Advanced themes" data-zh="高级主题">Advanced themes</span></li>
+                        </ul>
+                        <a href="#" class="btn btn-primary w-100" data-en="Start Free Trial" data-zh="开始免费试用">Start Free Trial</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h4 data-en="Pro" data-zh="专业版">Pro</h4>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">19.99</span>
+                                <span class="period" data-en="/month" data-zh="/月">/month</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> <span data-en="Unlimited books" data-zh="无限书籍">Unlimited books</span></li>
+                            <li><i class="bi bi-check-circle-fill"></i> <span data-en="AI-powered features" data-zh="AI 驱动功能">AI-powered features</span></li>
+                            <li><i class="bi bi-check-circle-fill"></i> <span data-en="Unlimited devices" data-zh="无限设备">Unlimited devices</span></li>
+                            <li><i class="bi bi-check-circle-fill"></i> <span data-en="Priority support" data-zh="优先支持">Priority support</span></li>
+                            <li><i class="bi bi-check-circle-fill"></i> <span data-en="Early access to new features" data-zh="提前体验新功能">Early access to new features</span></li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-primary w-100" data-en="Get Started" data-zh="开始使用">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="brand-icon">
+                            <i class="bi bi-soundwave"></i>
+                        </div>
+                        <span class="brand-text">Echo</span>
+                    </div>
+                    <p class="text-muted" data-en="Your gateway to endless stories and knowledge. Read better, learn faster." data-zh="您通往无尽故事和知识的门户。更好地阅读，更快地学习。">
+                        Your gateway to endless stories and knowledge. Read better, learn faster.
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6 mb-4 mb-lg-0">
+                    <h6 class="fw-bold mb-3" data-en="Product" data-zh="产品">Product</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#" data-en="Features" data-zh="功能特点">Features</a></li>
+                        <li><a href="#" data-en="Pricing" data-zh="价格">Pricing</a></li>
+                        <li><a href="#" data-en="Download" data-zh="下载">Download</a></li>
+                        <li><a href="#" data-en="Updates" data-zh="更新">Updates</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6 mb-4 mb-lg-0">
+                    <h6 class="fw-bold mb-3" data-en="Company" data-zh="公司">Company</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#" data-en="About" data-zh="关于">About</a></li>
+                        <li><a href="#" data-en="Blog" data-zh="博客">Blog</a></li>
+                        <li><a href="#" data-en="Careers" data-zh="招聘">Careers</a></li>
+                        <li><a href="#" data-en="Contact" data-zh="联系">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6 mb-4 mb-lg-0">
+                    <h6 class="fw-bold mb-3" data-en="Support" data-zh="支持">Support</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#" data-en="Help Center" data-zh="帮助中心">Help Center</a></li>
+                        <li><a href="#" data-en="Privacy" data-zh="隐私政策">Privacy</a></li>
+                        <li><a href="#" data-en="Terms" data-zh="服务条款">Terms</a></li>
+                        <li><a href="#" data-en="FAQ" data-zh="常见问题">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <h6 class="fw-bold mb-3" data-en="Social" data-zh="社交媒体">Social</h6>
+                    <div class="social-links">
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center text-muted">
+                <p class="mb-0">
+                    <span data-en="&copy; 2024 Echo. All rights reserved. Made with" data-zh="&copy; 2024 Echo. 保留所有权利。用">&copy; 2024 Echo. All rights reserved. Made with</span>
+                    <i class="bi bi-heart-fill text-danger"></i>
+                    <span data-en="" data-zh="制作"></span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Language Switching Script -->
+    <script>
+        // Initialize language from localStorage or default to English
+        let currentLanguage = localStorage.getItem('language') || 'en';
+
+        // Set initial language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            setLanguage(currentLanguage);
+        });
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'zh' : 'en';
+            setLanguage(currentLanguage);
+            localStorage.setItem('language', currentLanguage);
+        }
+
+        function setLanguage(lang) {
+            const elements = document.querySelectorAll('[data-en][data-zh]');
+
+            elements.forEach(element => {
+                const text = element.getAttribute(`data-${lang}`);
+
+                if (element.tagName === 'TITLE') {
+                    document.title = text;
+                } else if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    element.placeholder = text;
+                } else {
+                    element.textContent = text;
+                }
+            });
+
+            // Update language toggle button
+            const langToggle = document.getElementById('currentLang');
+            if (langToggle) {
+                langToggle.textContent = lang === 'en' ? 'EN' : '中文';
+            }
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+
+            // Update font family for Chinese
+            if (lang === 'zh') {
+                document.body.style.fontFamily = "'Noto Sans SC', 'Inter', sans-serif";
+            } else {
+                document.body.style.fontFamily = "'Inter', sans-serif";
+            }
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href !== '#signin' && href !== '#getstarted') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

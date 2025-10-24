@@ -1,0 +1,13 @@
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+openai==1.107.1
+httpx==0.28.1
+python-multipart==0.0.6
+ebooklib==0.18
+beautifulsoup4==4.12.2
+requests==2.31.0
+python-dotenv==1.0.0
+lxml==4.9.3
+python-multipart==0.0.6
+aiofiles==23.2.1
+pydantic==2.5.0
